@@ -1,8 +1,8 @@
 import js from "@eslint/js";
-import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import prettier from "eslint-config-prettier/flat";
 import jsxA11y from "eslint-plugin-jsx-a11y";
+import { defineConfig, globalIgnores } from "eslint/config";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
@@ -23,7 +23,7 @@ export default defineConfig([
     rules: {
       "no-console": "error",
       "no-debugger": "error",
-      eqeqeq: ["error", "always"],
+      "eqeqeq": ["error", "always"],
       "object-shorthand": ["error", "always"],
       "array-callback-return": "error",
       "default-case-last": "error",
@@ -54,7 +54,7 @@ export default defineConfig([
       "no-useless-rename": "error",
       "prefer-object-spread": "error",
       "prefer-template": "error",
-      radix: "error",
+      "radix": "error",
       "import/first": "error",
       "import/no-cycle": "error",
       "import/no-duplicates": "error",
@@ -156,9 +156,5 @@ export default defineConfig([
     },
   },
   prettier,
-  {
-    rules: {
-      curly: ["error", "all"],
-    },
-  },
+  { rules: { curly: ["error", "all"] } },
 ]);
