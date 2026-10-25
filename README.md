@@ -19,7 +19,9 @@ Open http://localhost:3000. Edit `src/app/page.tsx` to change the home page.
 | `npm run lint:fix`     | Apply automatic ESLint fixes.                                           |
 | `npm run format:check` | Check formatting with Prettier.                                         |
 | `npm run format`       | Format files with Prettier.                                             |
-| `npm run check`        | Run type checking, linting, and formatting checks.                      |
+| `npm test`             | Run unit tests once with Vitest.                                        |
+| `npm run test:watch`   | Run unit tests in watch mode.                                           |
+| `npm run check`        | Run type checking, linting, formatting checks, and unit tests.          |
 | `npm run build`        | Run all checks, then create the production build.                       |
 | `npm start`            | Serve the production build.                                             |
 
@@ -30,6 +32,8 @@ Open http://localhost:3000. Edit `src/app/page.tsx` to change the home page.
 `eslint.config.mjs` combines Next.js Core Web Vitals rules with typescript-eslint's `strictTypeChecked` and `stylisticTypeChecked` presets. Additional rules require explicit function return types, type-only imports, strict boolean conditions, and exhaustive union switches. Unsafe `any` operations, type assertions, non-null assertions, TypeScript suppression comments, unhandled promises, console calls, and debugger statements fail linting. The config also enables jsx-a11y's strict preset, extra React rules (leaked `&&` renders, index keys, untyped buttons), import cycle detection, shadowing, comparator-less `sort()`, and mandatory braces. `curly` is declared after `eslint-config-prettier` because that config turns it off.
 
 `.prettierrc.json` sets every Prettier option explicitly, so a Prettier upgrade that changes a default cannot reformat the codebase. `objectWrap: "collapse"` keeps an object on one line whenever it fits, so a newline after `{` is never a style choice. `@ianvs/prettier-plugin-sort-imports` sorts imports into groups: Node built-ins, packages, `@/` aliases, relative paths, then type imports. Side-effect imports such as `./globals.css` keep their position because moving them can change behavior. `.gitattributes` forces LF line endings, and `.vscode/` formats on save with the workspace Prettier.
+
+Unit tests live next to the code they test as `src/**/*.test.{ts,tsx}` and run in jsdom with React Testing Library. Vite 8 resolves the `@/` alias and compiles JSX natively, so no Vite plugins are installed. Test files import `test` and `expect` from `vitest` explicitly. `vitest.setup.ts` unmounts rendered components after each test. `test.only` fails the run, and test files get `@vitest/eslint-plugin`'s recommended rules plus bans on skipped, focused, and conditional tests. Vitest cannot render `async` Server Components, so cover those with end-to-end tests.
 
 Typed routes are enabled in `next.config.ts`. `typecheck` runs `next typegen` first so route and layout types exist on a fresh checkout.
 

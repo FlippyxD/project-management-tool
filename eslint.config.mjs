@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import vitest from "@vitest/eslint-plugin";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import prettier from "eslint-config-prettier/flat";
 import jsxA11y from "eslint-plugin-jsx-a11y";
@@ -153,6 +154,34 @@ export default defineConfig([
           requireDefaultForNonUnion: true,
         },
       ],
+    },
+  },
+  {
+    files: ["src/**/*.test.{ts,tsx}"],
+    extends: [vitest.configs.recommended],
+    rules: {
+      "vitest/consistent-test-it": ["error", { fn: "test" }],
+      "vitest/no-alias-methods": "error",
+      "vitest/no-conditional-expect": "error",
+      "vitest/no-conditional-in-test": "error",
+      "vitest/no-conditional-tests": "error",
+      "vitest/no-disabled-tests": "error",
+      "vitest/no-duplicate-hooks": "error",
+      "vitest/no-focused-tests": "error",
+      "vitest/no-standalone-expect": "error",
+      "vitest/no-test-return-statement": "error",
+      "vitest/prefer-comparison-matcher": "error",
+      "vitest/prefer-equality-matcher": "error",
+      "vitest/prefer-hooks-in-order": "error",
+      "vitest/prefer-hooks-on-top": "error",
+      "vitest/prefer-strict-equal": "error",
+      "vitest/prefer-to-be": "error",
+      "vitest/prefer-to-contain": "error",
+      "vitest/prefer-to-have-length": "error",
+      "vitest/prefer-vi-mocked": "error",
+      "vitest/require-mock-type-parameters": "error",
+      "vitest/require-to-throw-message": "error",
+      "vitest/valid-expect-in-promise": "error",
     },
   },
   prettier,
