@@ -3,6 +3,7 @@ import vitest from "@vitest/eslint-plugin";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import prettier from "eslint-config-prettier/flat";
 import jsxA11y from "eslint-plugin-jsx-a11y";
+import playwright from "eslint-plugin-playwright";
 import { defineConfig, globalIgnores } from "eslint/config";
 import tseslint from "typescript-eslint";
 
@@ -12,6 +13,9 @@ export default defineConfig([
     "out/**",
     "build/**",
     "coverage/**",
+    "test-results/**",
+    "playwright-report/**",
+    "blob-report/**",
     "next-env.d.ts",
   ]),
   js.configs.recommended,
@@ -182,6 +186,21 @@ export default defineConfig([
       "vitest/require-mock-type-parameters": "error",
       "vitest/require-to-throw-message": "error",
       "vitest/valid-expect-in-promise": "error",
+    },
+  },
+  {
+    files: ["e2e/**/*.ts"],
+    extends: [playwright.configs["flat/recommended"]],
+    rules: {
+      "playwright/no-conditional-expect": "error",
+      "playwright/no-conditional-in-test": "error",
+      "playwright/no-focused-test": "error",
+      "playwright/no-skipped-test": "error",
+      "playwright/no-wait-for-timeout": "error",
+      "playwright/prefer-strict-equal": "error",
+      "playwright/prefer-to-be": "error",
+      "playwright/prefer-web-first-assertions": "error",
+      "playwright/require-to-throw-message": "error",
     },
   },
   prettier,

@@ -3,6 +3,9 @@ node_modules/
 out/
 build/
 coverage/
+test-results/
+playwright-report/
+blob-report/
 next-env.d.ts
 package-lock.json
 *.tsbuildinfo
