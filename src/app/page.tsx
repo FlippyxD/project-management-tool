@@ -1,5 +1,6 @@
-import type { ReactElement } from "react";
 import styles from "./page.module.css";
+
+import type { ReactElement } from "react";
 
 export default function Home(): ReactElement {
   return (
